@@ -110,16 +110,17 @@ public class LambdaTermConverter {
 	    
 	    if(isDeBrujinIndex(term, i)) {
 		int deBrujinIndex = parseDeBrujinIndex(term, i);
-		int variablesCorrespondingLambda = deBrujinIndex + 1;
-		
-		if(variablesCorrespondingLambda - abstractionsCount<=0) {
-		    Character variable = boundVariables.get(variablesCorrespondingLambda - abstractionsCount + 1);
+		int variablesCorrespondingLambda = currentLambdaIndex - deBrujinIndex;
+	 
+		if(variablesCorrespondingLambda >= 0) {
+		    Character variable = boundVariables.get(variablesCorrespondingLambda);
 		    namedTerm.append(variable);
 		} else {
-		    if(!freeVariables.containsKey(variablesCorrespondingLambda - abstractionsCount)) {
-			freeVariables.put(variablesCorrespondingLambda - abstractionsCount, getFreshVariable());
+		    variablesCorrespondingLambda *= (-1);
+		    if(!freeVariables.containsKey(variablesCorrespondingLambda)) {
+			freeVariables.put(variablesCorrespondingLambda, getFreshVariable());
 		    }
-		    namedTerm.append(freeVariables.get(variablesCorrespondingLambda - abstractionsCount));
+		    namedTerm.append(freeVariables.get(variablesCorrespondingLambda));
 		    i += Integer.toString(deBrujinIndex).length() + 1;
 		}
 	    }
@@ -199,12 +200,12 @@ public class LambdaTermConverter {
     private int parseDeBrujinIndex(String term, int subtermStartIndex) {
 	StringBuilder deBrujinIndex = new StringBuilder();
 	deBrujinIndex.append(term.charAt(subtermStartIndex));
-	
+ 
 	int j = subtermStartIndex + 1;
-	while(j<term.length() && term.charAt(j)!=' ') {
+	while(j<term.length() && isDeBrujinIndex(term, j)) {
 	    deBrujinIndex.append(term.charAt(j));
 	}
-	
+ 
 	return Integer.parseInt(deBrujinIndex.toString());
     }
     
