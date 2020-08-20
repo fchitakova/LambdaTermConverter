@@ -26,22 +26,21 @@ public class LambdaTermConverter {
 	    System.out.println(MENU_OPTIONS);
 	    int choice = Integer.parseInt(reader.readLine());
 	    
-	    System.out.println("Enter lambda term:");
-	    String term = reader.readLine();
-	    
-	    switch(choice) {
-		case 0:
-		    System.out.println(lambdaTermConverter.convertToNameless(term));
-		    lambdaTermConverter.clear();
-		    break;
-		case 1:
-		    System.out.println(lambdaTermConverter.addNamesTo(term));
-		    lambdaTermConverter.clear();
-		    break;
-		case 2: {
-		    reader.close();
-		    return;
-		}
+	    if(choice==0) {
+		System.out.println("Enter lambda term:");
+		String term = reader.readLine();
+		System.out.println(lambdaTermConverter.convertToNameless(term));
+		lambdaTermConverter.clear();
+	    }
+	    if(choice==1) {
+		System.out.println("Enter lambda term:");
+		String term = reader.readLine();
+		System.out.println(lambdaTermConverter.addNamesTo(term));
+		lambdaTermConverter.clear();
+	    }
+	    if(choice == 2){
+		reader.close();
+		return;
 	    }
 	}
     }
