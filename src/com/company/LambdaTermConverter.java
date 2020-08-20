@@ -121,7 +121,7 @@ public class LambdaTermConverter {
 			freeVariables.put(variablesCorrespondingLambda, getFreshVariable());
 		    }
 		    namedTerm.append(freeVariables.get(variablesCorrespondingLambda));
-		    i += Integer.toString(deBrujinIndex).length() + 1;
+		    i += Integer.toString(deBrujinIndex).length();
 		}
 	    }
 	    
@@ -199,11 +199,11 @@ public class LambdaTermConverter {
     
     private int parseDeBrujinIndex(String term, int subtermStartIndex) {
 	StringBuilder deBrujinIndex = new StringBuilder();
-	deBrujinIndex.append(term.charAt(subtermStartIndex));
  
-	int j = subtermStartIndex + 1;
+	int j = subtermStartIndex;
 	while(j<term.length() && isDeBrujinIndex(term, j)) {
 	    deBrujinIndex.append(term.charAt(j));
+	    j++;
 	}
  
 	return Integer.parseInt(deBrujinIndex.toString());
