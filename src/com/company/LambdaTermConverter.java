@@ -106,8 +106,7 @@ public class LambdaTermConverter {
 		namedTerm.append("lm " + boundVariables.get(currentLambdaIndex) + '.');
 		i += NAMELESS_TERM_ABSTRACTION_SUBTERM_LENGTH - 1;
 	    }
-	    
-	    if(isDeBrujinIndex(term, i)) {
+	    else if(isDeBrujinIndex(term, i)) {
 		int deBrujinIndex = parseDeBrujinIndex(term, i);
 		int variablesCorrespondingLambda = currentLambdaIndex - deBrujinIndex;
 	 
